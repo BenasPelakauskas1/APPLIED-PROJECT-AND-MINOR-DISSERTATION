@@ -1,4 +1,4 @@
-package com.gmit.telecomsitetracker.ui.dashboard
+package com.gmit.telecomsitetracker.ui.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.gmit.telecomsitetracker.R
-import com.gmit.telecomsitetracker.databinding.FragmentDashboardBinding
+import com.gmit.telecomsitetracker.databinding.ActivityMapsBinding
 
-class DashboardFragment : Fragment() {
+class MapFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private lateinit var mapViewModel: MapViewModel
+    private var _binding: ActivityMapsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,14 +24,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        mapViewModel =
+            ViewModelProvider(this).get(MapViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = ActivityMapsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.map
+        mapViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
