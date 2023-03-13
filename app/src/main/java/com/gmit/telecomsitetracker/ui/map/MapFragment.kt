@@ -12,7 +12,7 @@ import com.gmit.telecomsitetracker.databinding.ActivityMapsBinding
 
 class MapFragment : Fragment() {
 
-    private lateinit var mapViewModel: MapViewModel
+   /* private lateinit var mapViewModel: MapViewModel
     private var _binding: ActivityMapsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -40,5 +40,5 @@ class MapFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
+    }*/
 }
