@@ -19,8 +19,8 @@
 
     // MAP NAVIGATION
     <fragment
-        android:id="@+id/navigation_map"
-        android:name="com.gmit.telecomsitetracker.MapsActivity"
-        android:label="Map"
-        tools:layout="@layout/activity_maps" />
+        android:id="@+id/mapsFragment"
+        android:name="com.gmit.telecomsitetracker.MapsFragment"
+        android:label="Site Map"
+        tools:layout="@layout/fragment_maps" />
 </navigation>
