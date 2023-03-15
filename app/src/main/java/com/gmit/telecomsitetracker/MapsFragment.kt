@@ -11,24 +11,31 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
-
+    // Snippets are hard-coded, should be updated to autofill status.
     private val callback = OnMapReadyCallback { googleMap ->
         // Add a marker in Galway and move the camera
         val galway = LatLng(53.272274, -9.053481)
-        googleMap.addMarker(MarkerOptions().position(galway).title("Marker in Galway"))
+        googleMap.addMarker(MarkerOptions().position(galway).title("GY069")
+            .snippet("Complete")
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(galway))
 
         // Marker Experiments (Two new markers in Galway)
         val mark1 = LatLng(53.261948, -9.071114)
-        googleMap.addMarker(MarkerOptions().position(mark1).title("Marker 1"))
+        googleMap.addMarker(MarkerOptions().position(mark1).title("GY420")
+            .snippet("Not Complete")
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
 
         googleMap.addMarker(
             MarkerOptions().position(LatLng(53.277942, -9.010461))
-                .title("Marker 2"))
+                .title("GY123")
+                .snippet("Access Issues")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
     }
     //Used to display fragment
     override fun onCreateView(
