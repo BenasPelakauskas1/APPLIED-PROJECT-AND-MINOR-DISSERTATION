@@ -1,4 +1,4 @@
-package com.gmit.telecomsitetracker
+    package com.gmit.telecomsitetracker
 
 import androidx.fragment.app.Fragment
 
@@ -6,19 +6,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.GoogleMap.*
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
-    // Snippets are hard-coded, should be updated to autofill status.
+    // Add a marker in Galway and move the camera
     private val callback = OnMapReadyCallback { googleMap ->
-        // Add a marker in Galway and move the camera
+        // Add zoom control gestures to map
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        // Change map type to satellite
+        googleMap.mapType = MAP_TYPE_HYBRID
         val galway = LatLng(53.272274, -9.053481)
         googleMap.addMarker(MarkerOptions().position(galway).title("GY069")
             .snippet("Complete")
