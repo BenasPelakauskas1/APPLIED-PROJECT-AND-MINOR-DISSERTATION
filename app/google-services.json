@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "211403910135",
+    "project_id": "telecom-inspection-tracker",
+    "storage_bucket": "telecom-inspection-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211403910135:android:4959769e05d2f58bc49cf2",
+        "android_client_info": {
+          "package_name": "com.gmit.telecomsitetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211403910135-hc2kntvm9dlnd8rm80radleduqahpb5f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmit.telecomsitetracker",
+            "certificate_hash": "4d94821358522c624d9a420590d7864ae9be3bd6"
+          }
+        },
+        {
+          "client_id": "211403910135-1of1sfiedn15t4b0op69fca6mnmjrocl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBryUPsH51RGPYWEl1cxSlOmKFFLRZOI9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211403910135-1of1sfiedn15t4b0op69fca6mnmjrocl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

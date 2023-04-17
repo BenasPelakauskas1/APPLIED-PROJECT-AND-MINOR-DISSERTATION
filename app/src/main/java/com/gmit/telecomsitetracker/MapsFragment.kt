@@ -38,6 +38,7 @@ class MapsFragment : Fragment() {
                 .snippet("Access Issues")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
     }
+
     //Used to display fragment
     override fun onCreateView(
         inflater: LayoutInflater,
