@@ -12,15 +12,18 @@ import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 
-class MapsFragment : Fragment() {
+    class MapsFragment : Fragment() {
     // Add a marker in Galway and move the camera
     private val callback = OnMapReadyCallback { googleMap ->
         // Add zoom control gestures to map
         googleMap.uiSettings.isZoomControlsEnabled = true
         // Change map type to satellite
         googleMap.mapType = MAP_TYPE_HYBRID
-        val galway = LatLng(53.272274, -9.053481)
+
+        // Hard-Coded co-ordinates
+      /*  val galway = LatLng(53.272274, -9.053481)
         googleMap.addMarker(MarkerOptions().position(galway).title("GY069")
             .snippet("Complete")
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
@@ -36,10 +39,26 @@ class MapsFragment : Fragment() {
             MarkerOptions().position(LatLng(53.277942, -9.010461))
                 .title("GY123")
                 .snippet("Access Issues")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))*/
+
+        // Retrieve co-ordinates from DB
+            val db = FirebaseFirestore.getInstance()
+            val docRef = db.collection("sites").document("glu5IPZL90eCksGRVa8F")
+
+            docRef.get().addOnSuccessListener { document ->
+                if (document != null) {
+                    val latitude = document.getDouble("latitude")
+                    val longitude = document.getDouble("longitude")
+
+                    val markerOptions = MarkerOptions()
+                    markerOptions.position(LatLng(latitude!!, longitude!!))
+                    markerOptions.title("Added from DB!")
+                    googleMap.addMarker(markerOptions)
+                }
+            }
     }
 
-    //Used to display fragment
+        //Used to display fragment
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
