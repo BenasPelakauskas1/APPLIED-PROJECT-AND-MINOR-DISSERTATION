@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.gmit.telecomsitetracker.R
 import com.gmit.telecomsitetracker.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
