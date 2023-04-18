@@ -1,8 +1,10 @@
     package com.gmit.telecomsitetracker
 
+import android.content.ContentValues.TAG
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +24,25 @@ import com.google.firebase.firestore.FirebaseFirestore
         // Change map type to satellite
         googleMap.mapType = MAP_TYPE_HYBRID
 
-        // Hard-Coded co-ordinates
-      /*  val galway = LatLng(53.272274, -9.053481)
+        // Retrieve co-ordinates from DB
+        val db = FirebaseFirestore.getInstance()
+        val collectionRef = db.collection("sites")
+
+        collectionRef.get().addOnSuccessListener { result ->
+            for (document in result) {
+                // Get coordinate data from Firestore
+                val latitude = document.getDouble("latitude")
+                val longitude = document.getDouble("longitude")
+
+                // Create a LatLng object from the coordinate data
+                val latLng = LatLng(latitude!!, longitude!!)
+
+                // Add a marker on the map at the LatLng position
+                googleMap.addMarker(MarkerOptions().position(latLng))
+            }
+
+            // 3 varieties of hard-coded co-ordinates
+            /*  val galway = LatLng(53.272274, -9.053481)
         googleMap.addMarker(MarkerOptions().position(galway).title("GY069")
             .snippet("Complete")
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
@@ -40,21 +59,10 @@ import com.google.firebase.firestore.FirebaseFirestore
                 .title("GY123")
                 .snippet("Access Issues")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))*/
-
-        // Retrieve co-ordinates from DB
-            val db = FirebaseFirestore.getInstance()
-            val docRef = db.collection("sites").document("glu5IPZL90eCksGRVa8F")
-
-            docRef.get().addOnSuccessListener { document ->
-                if (document != null) {
-                    val latitude = document.getDouble("latitude")
-                    val longitude = document.getDouble("longitude")
-
-                    val markerOptions = MarkerOptions()
-                    markerOptions.position(LatLng(latitude!!, longitude!!))
-                    markerOptions.title("Added from DB!")
-                    googleMap.addMarker(markerOptions)
-                }
+        }
+            // Handle failure
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Error getting documents: ", exception)
             }
     }
 
