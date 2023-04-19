@@ -33,12 +33,15 @@ import com.google.firebase.firestore.FirebaseFirestore
                 // Get coordinate data from Firestore
                 val latitude = document.getDouble("latitude")
                 val longitude = document.getDouble("longitude")
+                val siteID = document.getString("siteID")
+                val status = document.getString("status")
 
                 // Create a LatLng object from the coordinate data
                 val latLng = LatLng(latitude!!, longitude!!)
 
-                // Add a marker on the map at the LatLng position
-                googleMap.addMarker(MarkerOptions().position(latLng))
+                // Add a marker on map with site ID and status.
+                googleMap.addMarker(MarkerOptions().position(latLng).title(siteID)
+                    .snippet(status))
             }
 
             // 3 varieties of hard-coded co-ordinates
