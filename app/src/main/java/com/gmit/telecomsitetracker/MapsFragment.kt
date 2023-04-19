@@ -18,11 +18,20 @@ import com.google.firebase.firestore.FirebaseFirestore
 
     class MapsFragment : Fragment() {
     // Add a marker in Galway and move the camera
-    private val callback = OnMapReadyCallback { googleMap ->
+        private val callback = OnMapReadyCallback { googleMap ->
         // Add zoom control gestures to map
         googleMap.uiSettings.isZoomControlsEnabled = true
         // Change map type to satellite
         googleMap.mapType = MAP_TYPE_HYBRID
+        // Raise map above navbar (blocked zoom out button)
+        googleMap.setPadding(0, 0, 0, 110)
+
+        val launchCamLat = 53.11
+        val launchCamLong = -8.349
+        val launchCamLatLng = LatLng(launchCamLat, launchCamLong)
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(launchCamLatLng))
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(5f))
 
         // Retrieve co-ordinates from DB
         val db = FirebaseFirestore.getInstance()
@@ -40,7 +49,7 @@ import com.google.firebase.firestore.FirebaseFirestore
                 val latLng = LatLng(latitude!!, longitude!!)
 
                 // Colour code markers based off status
-                var markerColour : Float = 0f
+                var markerColour = 0f
                 when (status) {
                     "TODO" -> markerColour = BitmapDescriptorFactory.HUE_BLUE
                     "ACCESS" -> markerColour = BitmapDescriptorFactory.HUE_RED
