@@ -36,32 +36,25 @@ import com.google.firebase.firestore.FirebaseFirestore
                 val siteID = document.getString("siteID")
                 val status = document.getString("status")
 
-                // Create a LatLng object from the coordinate data
+                // Create a LatLng object from the coordinate data (!! forces not null)
                 val latLng = LatLng(latitude!!, longitude!!)
+
+                // Colour code markers based off status
+                var markerColour : Float = 0f
+                when (status) {
+                    "TODO" -> markerColour = BitmapDescriptorFactory.HUE_BLUE
+                    "ACCESS" -> markerColour = BitmapDescriptorFactory.HUE_RED
+                    "DONE" -> markerColour = BitmapDescriptorFactory.HUE_GREEN
+                    else -> {
+                        print("This should not have happened")
+                    }
+                }
 
                 // Add a marker on map with site ID and status.
                 googleMap.addMarker(MarkerOptions().position(latLng).title(siteID)
-                    .snippet(status))
+                    .snippet(status)
+                    .icon(BitmapDescriptorFactory.defaultMarker(markerColour)))
             }
-
-            // 3 varieties of hard-coded co-ordinates
-            /*  val galway = LatLng(53.272274, -9.053481)
-        googleMap.addMarker(MarkerOptions().position(galway).title("GY069")
-            .snippet("Complete")
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(galway))
-
-        // Marker Experiments (Two new markers in Galway)
-        val mark1 = LatLng(53.261948, -9.071114)
-        googleMap.addMarker(MarkerOptions().position(mark1).title("GY420")
-            .snippet("Not Complete")
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
-
-        googleMap.addMarker(
-            MarkerOptions().position(LatLng(53.277942, -9.010461))
-                .title("GY123")
-                .snippet("Access Issues")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))*/
         }
             // Handle failure
             .addOnFailureListener { exception ->
